@@ -38,3 +38,9 @@ button {
   display: block;
   text-align: center;
 }
+
+#otherInfo {
+  display: none;
+  border: 5px solid #f46242;
+  margin: auto;
+}
