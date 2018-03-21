@@ -16,7 +16,16 @@
 
   <script>
     $(function() {
-
+      $('button').click(function() {
+        let userInput = $('.para').val();
+        var sentenceCount = 0;
+        for (let i = 0; i <= userInput.length; i++) {
+          if (userInput[i] == '.' || userInput[i] == '!' || userInput[i] == '?') {
+            sentenceCount += 1;
+          }
+        }
+        $('#numOfSentences').html('Number Of Sentences: ' + sentenceCount);
+      });
     });
   </script>
 </head>
@@ -26,6 +35,7 @@
   <div class='container'>
     <textarea placeholder="Paste Your Text." class='para'></textarea>
     <button>Click Me!</button>
+    <h2 id="numOfSentences"></h2>
   </div>
 </body>
 

@@ -33,3 +33,8 @@ button {
   width: 760px;
   margin: auto;
 }
+
+#numOfSentences {
+  display: block;
+  text-align: center;
+}
