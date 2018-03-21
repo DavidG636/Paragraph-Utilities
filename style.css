@@ -27,3 +27,9 @@ div {
 textarea, textarea::-webkit-input-placeholder {
   font-size: 20px;
 }
+
+button {
+  display: block;
+  width: 760px;
+  margin: auto;
+}
