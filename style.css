@@ -10,8 +10,8 @@ body {
   background-size: contain;
 }
 
-div {
-  margin: 100px;
+.paraCont {
+  margin-top: 100px;
 }
 
 .para {

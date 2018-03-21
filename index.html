@@ -25,6 +25,9 @@
           }
         }
         $('#numOfSentences').html('Number Of Sentences: ' + sentenceCount);
+        $('#otherInfo').css('display', 'block');
+        let numOfWords = userInput.split(' ').length;
+        $('#wordCount').html('Word Count: ' + numOfWords);
       });
     });
   </script>
@@ -32,10 +35,14 @@
 
 <body>
   <h1 class='pageHeader'>Paragraph Utilities</h1>
-  <div class='container'>
+  <div class='paraCont container'>
     <textarea placeholder="Paste Your Text." class='para'></textarea>
     <button>Click Me!</button>
     <h2 id="numOfSentences"></h2>
+  </div>
+
+  <div id='otherInfo'>
+    <p id='wordCount'></p>
   </div>
 </body>
 
