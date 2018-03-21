@@ -6,6 +6,24 @@
 
 body {
   background-image: url("looseleaf.jpg");
-  background-repeat: repeat;
+  , body background-repeat: repeat;
   background-size: contain;
+}
+
+div {
+  margin: 100px;
+}
+
+.para {
+  display: block;
+  width: 760px;
+  height: 380px;
+  margin: auto;
+  border: 5px solid #f46242;
+  resize: none;
+  background-color: #bc897e;
+}
+
+textarea, textarea::-webkit-input-placeholder {
+  font-size: 20px;
 }
