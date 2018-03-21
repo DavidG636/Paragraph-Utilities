@@ -42,5 +42,12 @@ button {
 #otherInfo {
   display: none;
   border: 5px solid #f46242;
-  margin: auto;
+}
+
+#otherInfo:nth-child(even) {
+  background-color: #b7a8a5;
+}
+
+#otherInfo:nth-child(odd) {
+  background-color: lightgrey;
 }
