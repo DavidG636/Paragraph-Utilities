@@ -44,10 +44,17 @@ button {
   border: 5px solid #f46242;
 }
 
-#otherInfo:nth-child(even) {
+.wgCol {
   background-color: #b7a8a5;
+  border: 1px solid #ddd;
 }
 
-#otherInfo:nth-child(odd) {
+.lgCol {
   background-color: lightgrey;
+  border: 1px solid #ddd;
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
 }

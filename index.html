@@ -17,17 +17,44 @@
   <script>
     $(function() {
       $('button').click(function() {
+        var numOfWords
         let userInput = $('.para').val();
-        var sentenceCount = 0;
-        for (let i = 0; i <= userInput.length; i++) {
+        let sentenceCount = 0;
+        let punctuationCount = 0;
+        let punctuation = ['?', '.', '!', ',', ';', ':', '"', "'", '-'];
+        let punctuationLength = punctuation.length;
+        let charCountWithWhitespace = userInput.length;
+        for (let i = 0; i <= charCountWithWhitespace; i++) {
           if (userInput[i] == '.' || userInput[i] == '!' || userInput[i] == '?') {
             sentenceCount += 1;
+          }
+
+          for (let a = 0; a < punctuationLength; a++) {
+            if (userInput[i] == punctuation[a]) {
+              punctuationCount += 1
+            }
           }
         }
         $('#numOfSentences').html('Number Of Sentences: ' + sentenceCount);
         $('#otherInfo').css('display', 'block');
-        let numOfWords = userInput.split(' ').length;
+        if (userInput.split(' ') == "") {
+          numOfWords = (userInput.split(' ').length) - 1;
+        } else {
+          numOfWords = userInput.split(' ').length;
+        }
+
+        let numOfSpaces = 0;
+        for (let j = 0; j <= charCountWithWhitespace; j++) {
+          if (userInput[j] == " ") {
+            numOfSpaces += 1;
+          }
+        }
+        let charCountWithoutWhitespace = (charCountWithWhitespace - numOfSpaces);
+
         $('#wordCount').html('Word Count: ' + numOfWords);
+        $('#characterCountWithWhitespace').html('Character Count With Whitespace: ' + charCountWithWhitespace);
+        $('#punctutationMarks').html('Punctuation Marks: ' + punctuationCount);
+        $('#characterCountWithoutWhitespace').html('Character Count Without Whitespace: ' + charCountWithoutWhitespace);
       });
     });
   </script>
@@ -42,7 +69,24 @@
   </div>
 
   <div id='otherInfo' class='container'>
-    <p id='wordCount'></p>
+
+    <div class="row">
+      <div class="col-md-6 col-xs-6 lgCol">
+        <p id='wordCount'></p>
+      </div>
+      <div class="col-xs-6 col-md-6 wgCol">
+        <p id='characterCountWithWhitespace'></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-xs-6 lgCol">
+        <p id='punctutationMarks'></p>
+      </div>
+      <div class="col-xs-6 col-md-6 wgCol">
+        <p id='characterCountWithoutWhitespace'></p>
+      </div>
+    </div>
   </div>
 </body>
 
