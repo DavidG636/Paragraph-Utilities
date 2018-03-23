@@ -6,7 +6,7 @@
 
 body {
   background-image: url("looseleaf.jpg");
-  , body background-repeat: repeat;
+  background-repeat: repeat;
   background-size: contain;
 }
 
@@ -57,4 +57,12 @@ button {
 p {
   text-align: center;
   margin-top: 10px;
+}
+
+.eraseBtn {
+  text-align:center;
+  margin-top:5px;
+  margin-left:auto;
+  margin-right:auto;
+  
 }
