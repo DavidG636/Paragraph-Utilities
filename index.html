@@ -16,6 +16,10 @@
 
   <script>
     $(function() {
+      $('.delete').click(function() {
+        $('.para').val('');
+      });
+
       $('button').click(function() {
         var numOfWords
         let userInput = $('.para').val();
@@ -31,15 +35,17 @@
 
           for (let a = 0; a < punctuationLength; a++) {
             if (userInput[i] == punctuation[a]) {
-              punctuationCount += 1
+              punctuationCount += 1;
             }
           }
         }
+
         $('#numOfSentences').html('Number Of Sentences: ' + sentenceCount);
         $('#otherInfo').css('display', 'block');
         if (userInput.split(' ') == "") {
           numOfWords = (userInput.split(' ').length) - 1;
-        } else {
+        }
+        else {
           numOfWords = userInput.split(' ').length;
         }
 
@@ -61,12 +67,12 @@
 </head>
 
 <body>
-  <h1 class='pageHeader'>Paragraph Utilities</h1>
+  <h1 class='pageHeader'><span class="glyphicon glyphicon-pencil"></span> Paragraph Utilities <span class="glyphicon glyphicon-pencil"></span></h1>
   <div class='paraCont container'>
     <textarea placeholder="Paste Your Text." class='para'></textarea>
     <button>Click Me!</button>
     <div class='eraseBtn'>
-      <span class="glyphicon glyphicon-erase"></span>
+      <span class="delete glyphicon glyphicon-erase"></span>
     </div>
     <h2 id="numOfSentences"></h2>
   </div>
