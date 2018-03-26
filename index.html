@@ -12,16 +12,26 @@
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   <link rel="stylesheet" href="style.css" type="text/css">
+
 
   <script>
     $(function() {
+      var prepositions;
+
+      function readFile () {
+        jQuery.get("prepositions.txt", function (txt) {
+          $('#output').text(txt);
+        });
+      }
+      
       $('.delete').click(function() {
         $('.para').val('');
       });
 
       $('button').click(function() {
-        var numOfWords
+        var numOfWords;
         let userInput = $('.para').val();
         let sentenceCount = 0;
         let punctuationCount = 0;
@@ -39,6 +49,10 @@
             }
           }
         }
+
+        $.get('/prepositions.txt', function(data) {
+          alert(data);
+        });
 
         $('#numOfSentences').html('Number Of Sentences: ' + sentenceCount);
         $('#otherInfo').css('display', 'block');
@@ -68,9 +82,12 @@
 
 <body>
   <h1 class='pageHeader'><span class="glyphicon glyphicon-pencil"></span> Paragraph Utilities <span class="glyphicon glyphicon-pencil"></span></h1>
+  
+  <div id='output'></div>
+  
   <div class='paraCont container'>
     <textarea placeholder="Paste Your Text." class='para'></textarea>
-    <button>Click Me!</button>
+    <button>Analyze Paragraph <span class="glyphicon glyphicon-ok-sign"></span></button>
     <div class='eraseBtn'>
       <span class="delete glyphicon glyphicon-erase"></span>
     </div>
