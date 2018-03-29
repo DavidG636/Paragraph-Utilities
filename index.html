@@ -38,31 +38,29 @@
         let punctuationLength = punctuation.length;
         let charCountWithWhitespace = userInput.length;
         let prepositionCount = 0;
-        
-        if(userInput == '' || userInput == ' ') {
-          $('.error').css('display','block');
-        }
-        else {
 
+        let lettersAndNums = /^[0-9a-zA-Z]+$/;
+
+        if (userInput.match(lettersAndNums)) {
           for (let i = 0; i <= charCountWithWhitespace; i++) {
             if (userInput[i] == '.' || userInput[i] == '!' || userInput[i] == '?') {
               sentenceCount += 1;
             }
-  
+
             for (let a = 0; a < punctuationLength; a++) {
               if (userInput[i] == punctuation[a]) {
                 punctuationCount += 1;
               }
             }
           }
-  
+
           $('#numOfSentences').html('Number Of Sentences: ' + sentenceCount);
           $('#otherInfo').css('display', 'block');
-            userInput = userInput.toLowerCase();
-            words = userInput.split(' ');
-  
-            numOfWords = userInput.split(' ').length;
-  
+          userInput = userInput.toLowerCase();
+          words = userInput.split(' ');
+
+          numOfWords = userInput.split(' ').length;
+
           for (let b = 0; b <= numOfWords; b++) {
             for (let r = 0; r < prepositions.length; r++) {
               if (words[b] == prepositions[r]) {
@@ -70,7 +68,7 @@
               }
             }
           }
-  
+
           let numOfSpaces = 0;
           for (let j = 0; j <= charCountWithWhitespace; j++) {
             if (userInput[j] == " ") {
@@ -78,12 +76,15 @@
             }
           }
           let charCountWithoutWhitespace = (charCountWithWhitespace - numOfSpaces);
-  
+
           $('#wordCount').html('Word Count: ' + numOfWords);
           $('#characterCountWithWhitespace').html('Character Count With Whitespace: ' + charCountWithWhitespace);
           $('#punctutationMarks').html('Punctuation Marks: ' + punctuationCount);
           $('#characterCountWithoutWhitespace').html('Character Count Without Whitespace: ' + charCountWithoutWhitespace);
           $('#preposition').html('Number of Prepositions: ' + prepositionCount);
+        }
+        else {
+          $('.error').css('display', 'block');
         }
       });
     });
