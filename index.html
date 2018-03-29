@@ -18,19 +18,18 @@
 
   <script>
     $(function() {
-      var prepositions;
+      var prepositions = new Array("a", "abaft", "aboard", "about", "above", "absent", "across", "afore", "after", "against", "along", "alongside", "amid", "amidst", "among", "amongst", "an", "apropos", "apud", "around", "as", "aside", "astride", "at", "athwart", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "circa", "concerning", "despite", "down", "during", "except", "excluding", "failing", "following", "for", "from", "given", "in", "including", "inside", "into", "lest", "like", "mid", "midst", "minus", "modulo", "near", "next", "notwithstanding", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "pace", "past", "per", "plus", "pro", "qua", "regarding", "round", "sans", "save", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "vs.", "via", "vice", "with", "within", "without", "worth", "according", "to", "ahead", "of", "apart", "from", "as", "for", "as", "of", "as", "per", "as", "regards", "aside", "from", "back", "to", "because", "of", "close", "to", "due", "to", "except", "for", "far", "from", "into", "inside", "of", "instead", "of", "left", "of", "near", "to", "next", "to", "on", "to", "out", "from", "out", "of", "outside", "of", "owing", "to", "prior", "to", "pursuant", "to", "rather", "than", "regardless", "of", "right", "of", "subsequent", "to", "thanks", "to", "that", "of", "up", "to", "where", "as", "as", "far", "as", "as", "long", "as", "as", "opposed", "to", "as", "soon", "as", "as", "well", "as", "regarding");
+      var words;
 
-      function readFile () {
-        jQuery.get("prepositions.txt", function (txt) {
-          $('#output').text(txt);
-        });
-      }
-      
       $('.delete').click(function() {
         $('.para').val('');
       });
 
-      $('button').click(function() {
+      $('.printBtn').click(function() {
+        window.print();
+      });
+
+      $('.analyze').click(function() {
         var numOfWords;
         let userInput = $('.para').val();
         let sentenceCount = 0;
@@ -38,43 +37,54 @@
         let punctuation = ['?', '.', '!', ',', ';', ':', '"', "'", '-'];
         let punctuationLength = punctuation.length;
         let charCountWithWhitespace = userInput.length;
-        for (let i = 0; i <= charCountWithWhitespace; i++) {
-          if (userInput[i] == '.' || userInput[i] == '!' || userInput[i] == '?') {
-            sentenceCount += 1;
-          }
-
-          for (let a = 0; a < punctuationLength; a++) {
-            if (userInput[i] == punctuation[a]) {
-              punctuationCount += 1;
-            }
-          }
-        }
-
-        $.get('/prepositions.txt', function(data) {
-          alert(data);
-        });
-
-        $('#numOfSentences').html('Number Of Sentences: ' + sentenceCount);
-        $('#otherInfo').css('display', 'block');
-        if (userInput.split(' ') == "") {
-          numOfWords = (userInput.split(' ').length) - 1;
+        let prepositionCount = 0;
+        
+        if(userInput == '' || userInput == ' ') {
+          $('.error').css('display','block');
         }
         else {
-          numOfWords = userInput.split(' ').length;
-        }
 
-        let numOfSpaces = 0;
-        for (let j = 0; j <= charCountWithWhitespace; j++) {
-          if (userInput[j] == " ") {
-            numOfSpaces += 1;
+          for (let i = 0; i <= charCountWithWhitespace; i++) {
+            if (userInput[i] == '.' || userInput[i] == '!' || userInput[i] == '?') {
+              sentenceCount += 1;
+            }
+  
+            for (let a = 0; a < punctuationLength; a++) {
+              if (userInput[i] == punctuation[a]) {
+                punctuationCount += 1;
+              }
+            }
           }
+  
+          $('#numOfSentences').html('Number Of Sentences: ' + sentenceCount);
+          $('#otherInfo').css('display', 'block');
+            userInput = userInput.toLowerCase();
+            words = userInput.split(' ');
+  
+            numOfWords = userInput.split(' ').length;
+  
+          for (let b = 0; b <= numOfWords; b++) {
+            for (let r = 0; r < prepositions.length; r++) {
+              if (words[b] == prepositions[r]) {
+                prepositionCount += 1;
+              }
+            }
+          }
+  
+          let numOfSpaces = 0;
+          for (let j = 0; j <= charCountWithWhitespace; j++) {
+            if (userInput[j] == " ") {
+              numOfSpaces += 1;
+            }
+          }
+          let charCountWithoutWhitespace = (charCountWithWhitespace - numOfSpaces);
+  
+          $('#wordCount').html('Word Count: ' + numOfWords);
+          $('#characterCountWithWhitespace').html('Character Count With Whitespace: ' + charCountWithWhitespace);
+          $('#punctutationMarks').html('Punctuation Marks: ' + punctuationCount);
+          $('#characterCountWithoutWhitespace').html('Character Count Without Whitespace: ' + charCountWithoutWhitespace);
+          $('#preposition').html('Number of Prepositions: ' + prepositionCount);
         }
-        let charCountWithoutWhitespace = (charCountWithWhitespace - numOfSpaces);
-
-        $('#wordCount').html('Word Count: ' + numOfWords);
-        $('#characterCountWithWhitespace').html('Character Count With Whitespace: ' + charCountWithWhitespace);
-        $('#punctutationMarks').html('Punctuation Marks: ' + punctuationCount);
-        $('#characterCountWithoutWhitespace').html('Character Count Without Whitespace: ' + charCountWithoutWhitespace);
       });
     });
   </script>
@@ -82,12 +92,14 @@
 
 <body>
   <h1 class='pageHeader'><span class="glyphicon glyphicon-pencil"></span> Paragraph Utilities <span class="glyphicon glyphicon-pencil"></span></h1>
-  
-  <div id='output'></div>
-  
+
+
   <div class='paraCont container'>
     <textarea placeholder="Paste Your Text." class='para'></textarea>
-    <button>Analyze Paragraph <span class="glyphicon glyphicon-ok-sign"></span></button>
+    <button class='analyze'>Analyze Paragraph <span class="glyphicon glyphicon-ok-sign"></span></button>
+    <div class="error alert alert-danger">
+      <strong>Error:</strong> Type something before you analyze it!
+    </div>
     <div class='eraseBtn'>
       <span class="delete glyphicon glyphicon-erase"></span>
     </div>
@@ -113,7 +125,16 @@
         <p id='characterCountWithoutWhitespace'></p>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:#6a728c;">
+        <p id='preposition'></p>
+      </div>
+    </div>
   </div>
+  <button type="button" class="btn btn-default btn-sm printBtn">
+          <span class="glyphicon glyphicon-print"></span> Print
+        </button>
 </body>
 
 </html>

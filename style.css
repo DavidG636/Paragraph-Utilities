@@ -71,3 +71,12 @@ p {
 .eraseBtn .glyphicon-erase:hover {
   color: #ed1c24;
 }
+
+.printBtn {
+  display:block;
+  margin:auto;
+}
+
+.error {
+  display:none;
+}
