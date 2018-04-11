@@ -34,16 +34,17 @@
         var numOfWords;
         let userInput = $('.para').val();
         userInput = userInput.toString();
-        console.log(userInput);
         let sentenceCount = 0;
         let punctuationCount = 0;
         let punctuation = ['?', '.', '!', ',', ';', ':', '"', "'", '-'];
         let punctuationLength = punctuation.length;
         let charCountWithWhitespace = userInput.length;
         let prepositionCount = 0;
-        console.log(userInput.match(charsCheck));
-
-        if (userInput[0].match(charsCheck) || userInput[1].match(charsCheck)) {
+        
+        if (userInput == '') {
+          errorState("block");
+        }
+        else if (userInput[0].match(charsCheck) || userInput[1].match(charsCheck)) {
            
           errorState("none");
 
@@ -92,6 +93,12 @@
         }
       });
       function errorState (state){
+        if (state == 'block' && $('#otherInfo').css('display') == 'block') {
+          $('#otherInfo').css('display', 'none');
+        }
+        else if (state == 'none' && $('#otherInfo').css('display') == 'none') {
+          $('#otherInfo').css('display', 'block');
+        }
         $('.error').css('display', state);
       }
     });
