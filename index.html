@@ -20,12 +20,25 @@
 
   <script>
     $(function() {
+      var classError;
       var charsCheck = /^[A-Za-z1-99999]+$/;
       var prepositions = new Array("a", "abaft", "aboard", "about", "above", "absent", "across", "afore", "after", "against", "along", "alongside", "amid", "amidst", "among", "amongst", "an", "apropos", "apud", "around", "as", "aside", "astride", "at", "athwart", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "circa", "concerning", "despite", "down", "during", "except", "excluding", "failing", "following", "for", "from", "given", "in", "including", "inside", "into", "lest", "like", "mid", "midst", "minus", "modulo", "near", "next", "notwithstanding", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "pace", "past", "per", "plus", "pro", "qua", "regarding", "round", "sans", "save", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "vs.", "via", "vice", "with", "within", "without", "worth", "according", "to", "ahead", "of", "apart", "from", "as", "for", "as", "of", "as", "per", "as", "regards", "aside", "from", "back", "to", "because", "of", "close", "to", "due", "to", "except", "for", "far", "from", "into", "inside", "of", "instead", "of", "left", "of", "near", "to", "next", "to", "on", "to", "out", "from", "out", "of", "outside", "of", "owing", "to", "prior", "to", "pursuant", "to", "rather", "than", "regardless", "of", "right", "of", "subsequent", "to", "thanks", "to", "that", "of", "up", "to", "where", "as", "as", "far", "as", "as", "long", "as", "as", "opposed", "to", "as", "soon", "as", "as", "well", "as", "regarding");
       var words;
 
+      function getUserInput() {
+        let userInput = $('.para').val();
+        userInput = userInput.toString();
+        return userInput;
+      }
+
       $('.delete').click(function() {
         $('.para').val('');
+        let userInput = getUserInput();
+        classError = new ErrorState('block');
+        let state = classError.returnCurrentState();
+        if (userInput == '' && state == 'none') {
+          infoState('none');
+        }
       });
 
       $('.printBtn').click(function() {
@@ -33,9 +46,8 @@
       });
 
       $('.analyze').click(function() {
+        let userInput = getUserInput();
         var numOfWords;
-        let userInput = $('.para').val();
-        userInput = userInput.toString();
         let sentenceCount = 0;
         let punctuationCount = 0;
         let punctuation = ['?', '.', '!', ',', ';', ':', '"', "'", '-'];
@@ -44,11 +56,13 @@
         let prepositionCount = 0;
 
         if (userInput == '') {
-          errorState("block");
+          classError = new ErrorState('block');
+          classError.check();
         }
         else if (userInput[0].match(charsCheck) || userInput[1].match(charsCheck)) {
 
-          errorState("none");
+          classError = new ErrorState('none');
+          classError.check();
 
           for (let i = 0; i <= charCountWithWhitespace; i++) {
             if (userInput[i] == '.' || userInput[i] == '!' || userInput[i] == '?') {
@@ -91,19 +105,43 @@
           $('#preposition').html('Number of Prepositions: ' + prepositionCount);
         }
         else {
-          errorState("block");
+          classError = new ErrorState('block');
+          classError.check();
         }
       });
 
-      function errorState(state) {
-        if (state == 'block' && $('#otherInfo').css('display') == 'block') {
-          $('#otherInfo').css('display', 'none');
-        }
-        else if (state == 'none' && $('#otherInfo').css('display') == 'none') {
+      function infoState(state) {
+        if (state == 'block') {
           $('#otherInfo').css('display', 'block');
         }
-        $('.error').css('display', state);
+        else if (state == 'none') {
+          $('#otherInfo').css('display', 'none');
+        }
       }
+
+      class ErrorState {
+        constructor(state) {
+          this.state = state;
+        }
+
+        check() {
+          if (this.state == 'block' && $('#otherInfo').css('display') == 'block') {
+            infoState('none');
+          }
+          else if (this.state == 'none' && $('#otherInfo').css('display') == 'none') {
+            infoState('block');
+          }
+          $('.error').css('display', this.state);
+        }
+
+
+        returnCurrentState() {
+          return $('.error').css('display');
+        }
+
+
+      }
+
     });
   </script>
 </head>
@@ -123,9 +161,9 @@
       </div>
       <h2 id="numOfSentences"></h2>
     </div>
-  
+
     <div id='otherInfo' class='container'>
-  
+
       <div class="row">
         <div class="col-md-6 col-xs-6 lgCol">
           <p id='wordCount'></p>
@@ -134,7 +172,7 @@
           <p id='characterCountWithWhitespace'></p>
         </div>
       </div>
-  
+
       <div class="row">
         <div class="col-md-6 col-xs-6 lgCol">
           <p id='punctutationMarks'></p>
@@ -143,7 +181,7 @@
           <p id='characterCountWithoutWhitespace'></p>
         </div>
       </div>
-  
+
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:#6a728c;">
           <p id='preposition'></p>
