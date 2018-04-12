@@ -15,6 +15,8 @@
 
   <link rel="stylesheet" href="style.css" type="text/css">
 
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
   <script>
     $(function() {
@@ -40,12 +42,12 @@
         let punctuationLength = punctuation.length;
         let charCountWithWhitespace = userInput.length;
         let prepositionCount = 0;
-        
+
         if (userInput == '') {
           errorState("block");
         }
         else if (userInput[0].match(charsCheck) || userInput[1].match(charsCheck)) {
-           
+
           errorState("none");
 
           for (let i = 0; i <= charCountWithWhitespace; i++) {
@@ -92,7 +94,8 @@
           errorState("block");
         }
       });
-      function errorState (state){
+
+      function errorState(state) {
         if (state == 'block' && $('#otherInfo').css('display') == 'block') {
           $('#otherInfo').css('display', 'none');
         }
