@@ -10,6 +10,18 @@ body {
   background-size: contain;
 }
 
+.everything {
+  display:table;
+}
+
+.everything:nth-child(odd) {
+  display:table-cell;
+}
+
+.everything:nth-child(even) {
+  display:table-cell;
+}
+
 .paraCont {
   margin-top: 100px;
 }

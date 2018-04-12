@@ -111,48 +111,49 @@
 <body>
   <h1 class='pageHeader'><span class="glyphicon glyphicon-pencil"></span> Paragraph Utilities <span class="glyphicon glyphicon-pencil"></span></h1>
 
-
-  <div class='paraCont container'>
-    <textarea placeholder="Paste Your Text." class='para'></textarea>
-    <button class='analyze'>Analyze Paragraph <span class="glyphicon glyphicon-ok-sign"></span></button>
-    <div class="error alert alert-danger">
-      <strong>Error:</strong> Type something before you analyze it!
+  <div class='everything'>
+    <div class='paraCont container'>
+      <textarea placeholder="Paste Your Text." class='para'></textarea>
+      <button class='analyze'>Analyze Paragraph <span class="glyphicon glyphicon-ok-sign"></span></button>
+      <div class="error alert alert-danger">
+        <strong>Error:</strong> Type something before you analyze it!
+      </div>
+      <div class='eraseBtn'>
+        <span class="delete glyphicon glyphicon-erase"></span>
+      </div>
+      <h2 id="numOfSentences"></h2>
     </div>
-    <div class='eraseBtn'>
-      <span class="delete glyphicon glyphicon-erase"></span>
+  
+    <div id='otherInfo' class='container'>
+  
+      <div class="row">
+        <div class="col-md-6 col-xs-6 lgCol">
+          <p id='wordCount'></p>
+        </div>
+        <div class="col-xs-6 col-md-6 wgCol">
+          <p id='characterCountWithWhitespace'></p>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 col-xs-6 lgCol">
+          <p id='punctutationMarks'></p>
+        </div>
+        <div class="col-xs-6 col-md-6 wgCol">
+          <p id='characterCountWithoutWhitespace'></p>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:#6a728c;">
+          <p id='preposition'></p>
+        </div>
+      </div>
     </div>
-    <h2 id="numOfSentences"></h2>
+    <button type="button" class="btn btn-default btn-sm printBtn">
+            <span class="glyphicon glyphicon-print"></span> Print
+    </button>
   </div>
-
-  <div id='otherInfo' class='container'>
-
-    <div class="row">
-      <div class="col-md-6 col-xs-6 lgCol">
-        <p id='wordCount'></p>
-      </div>
-      <div class="col-xs-6 col-md-6 wgCol">
-        <p id='characterCountWithWhitespace'></p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6 col-xs-6 lgCol">
-        <p id='punctutationMarks'></p>
-      </div>
-      <div class="col-xs-6 col-md-6 wgCol">
-        <p id='characterCountWithoutWhitespace'></p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12" style="background-color:#6a728c;">
-        <p id='preposition'></p>
-      </div>
-    </div>
-  </div>
-  <button type="button" class="btn btn-default btn-sm printBtn">
-          <span class="glyphicon glyphicon-print"></span> Print
-  </button>
 </body>
 
 </html>
