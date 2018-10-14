@@ -10,18 +10,6 @@ body {
   background-size: contain;
 }
 
-.everything {
-  display:table;
-}
-
-.everything:nth-child(odd) {
-  display:table-cell;
-}
-
-.everything:nth-child(even) {
-  display:table-cell;
-}
-
 .paraCont {
   margin-top: 100px;
 }
@@ -72,9 +60,17 @@ p {
   margin-top: 10px;
 }
 
+button {
+  background-color: #e7e7e7;
+  border-color: #5c616d;
+}
+
 .eraseBtn {
   text-align: center;
   margin-top: 5px;
+  background-color: #e7e7e7;
+  border-color: #5c616d;
+  border-width: thick;
 }
 
 .eraseBtn .glyphicon-erase:hover {
@@ -84,6 +80,8 @@ p {
 .printBtn {
   display:block;
   margin:auto;
+  background-color: #e7e7e7;
+  border-color: #5c616d;
 }
 
 .error {
