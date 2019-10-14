@@ -70,11 +70,11 @@ button {
   margin-top: 5px;
   background-color: #e7e7e7;
   border-color: #5c616d;
-  border-width: thick;
 }
 
-.eraseBtn .glyphicon-erase:hover {
-  color: #ed1c24;
+.eraserPic {
+  width: 82px;
+  height:82px;
 }
 
 .printBtn {

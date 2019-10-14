@@ -10,7 +10,7 @@ $(function() {
         return userInput;
     }
 
-    $('.delete').click(function() {
+    $('.eraseBtn').click(function() {
         $('.para').val('');
         let userInput = getUserInput();
         classError = new ErrorState('block');
