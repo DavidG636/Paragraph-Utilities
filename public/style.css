@@ -31,8 +31,6 @@ textarea::-webkit-input-placeholder {
 
 button {
   display: block;
-  width: 760px;
-  margin: auto;
 }
 
 #numOfSentences {
@@ -41,7 +39,7 @@ button {
 }
 
 #otherInfo {
-  display: none;
+  display: block;
   border: 5px solid #f46242;
 }
 
@@ -65,9 +63,14 @@ button {
   border-color: #5c616d;
 }
 
+#utilButton {
+  border-radius: 100%;
+  width:100px;
+  height:100px;
+}
+
 .eraseBtn {
   text-align: center;
-  margin-top: 5px;
   background-color: #e7e7e7;
   border-color: #5c616d;
 }
@@ -78,12 +81,13 @@ button {
 }
 
 .printBtn {
-  display:block;
-  margin:auto;
   background-color: #e7e7e7;
   border-color: #5c616d;
 }
 
-.error {
-  display:none;
+
+#utilButtons {
+  margin-top: 5px;
+  margin-right:auto;
+  margin-left: auto;
 }

@@ -1,5 +1,4 @@
 $(function() {
-    var classError;
     var charsCheck = /^[A-Za-z1-99999]+$/;
     var prepositions = new Array("a", "abaft", "aboard", "about", "above", "absent", "across", "afore", "after", "against", "along", "alongside", "amid", "amidst", "among", "amongst", "an", "apropos", "apud", "around", "as", "aside", "astride", "at", "athwart", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "circa", "concerning", "despite", "down", "during", "except", "excluding", "failing", "following", "for", "from", "given", "in", "including", "inside", "into", "lest", "like", "mid", "midst", "minus", "modulo", "near", "next", "notwithstanding", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "pace", "past", "per", "plus", "pro", "qua", "regarding", "round", "sans", "save", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "vs.", "via", "vice", "with", "within", "without", "worth", "according", "to", "ahead", "of", "apart", "from", "as", "for", "as", "of", "as", "per", "as", "regards", "aside", "from", "back", "to", "because", "of", "close", "to", "due", "to", "except", "for", "far", "from", "into", "inside", "of", "instead", "of", "left", "of", "near", "to", "next", "to", "on", "to", "out", "from", "out", "of", "outside", "of", "owing", "to", "prior", "to", "pursuant", "to", "rather", "than", "regardless", "of", "right", "of", "subsequent", "to", "thanks", "to", "that", "of", "up", "to", "where", "as", "as", "far", "as", "as", "long", "as", "as", "opposed", "to", "as", "soon", "as", "as", "well", "as", "regarding");
     var words;
@@ -12,19 +11,14 @@ $(function() {
 
     $('.eraseBtn').click(function() {
         $('.para').val('');
-        let userInput = getUserInput();
-        classError = new ErrorState('block');
-        let state = classError.returnCurrentState();
-        if (userInput == '' && state == 'none') {
-            infoState('none');
-        }
+        $('.para').keyup();
     });
 
     $('.printBtn').click(function() {
         window.print();
     });
 
-    $('.analyze').click(function() {
+    $('.para').keyup(function() {
         let userInput = getUserInput();
         var numOfWords;
         let sentenceCount = 0;
@@ -34,14 +28,15 @@ $(function() {
         let charCountWithWhitespace = userInput.length;
         let prepositionCount = 0;
 
-        if (userInput == '') {
-            classError = new ErrorState('block');
-            classError.check();
+        if (userInput[0] == undefined) {
+          sentenceCount = 0;
+          punctuationCount = 0;
+          charCountWithWhitespace = 0;
+          charCountWithoutWhitespace = 0;
+          prepositionCount = 0;
+          numOfWords = 0;
         }
         else if (userInput[0].match(charsCheck) || userInput[1].match(charsCheck)) {
-
-            classError = new ErrorState('none');
-            classError.check();
 
             for (let i = 0; i <= charCountWithWhitespace; i++) {
                 if (userInput[i] == '.' || userInput[i] == '!' || userInput[i] == '?') {
@@ -55,8 +50,7 @@ $(function() {
                 }
             }
 
-            $('#numOfSentences').html('Number Of Sentences: ' + sentenceCount);
-            $('#otherInfo').css('display', 'block');
+            $('.sentenceNum').html(sentenceCount);
             userInput = userInput.toLowerCase();
             words = userInput.split(' ');
 
@@ -76,49 +70,11 @@ $(function() {
                 }
             }
             let charCountWithoutWhitespace = (charCountWithWhitespace - numOfSpaces);
-
-            $('#wordCount').html('Word Count: ' + numOfWords);
-            $('#characterCountWithWhitespace').html('Character Count With Whitespace: ' + charCountWithWhitespace);
-            $('#punctutationMarks').html('Punctuation Marks: ' + punctuationCount);
-            $('#characterCountWithoutWhitespace').html('Character Count Without Whitespace: ' + charCountWithoutWhitespace);
-            $('#preposition').html('Number of Prepositions: ' + prepositionCount);
         }
-        else {
-            classError = new ErrorState('block');
-            classError.check();
-        }
+        $('#wordCount').html(numOfWords);
+        $('#characterCountWithWhitespace').html(charCountWithWhitespace);
+        $('#punctutationMarks').html(punctuationCount);
+        $('#characterCountWithoutWhitespace').html(charCountWithoutWhitespace);
+        $('#preposition').html(prepositionCount);
     });
-
-    function infoState(state) {
-        if (state == 'block') {
-            $('#otherInfo').css('display', 'block');
-        }
-        else if (state == 'none') {
-            $('#otherInfo').css('display', 'none');
-        }
-    }
-
-    class ErrorState {
-        constructor(state) {
-            this.state = state;
-        }
-
-        check() {
-            if (this.state == 'block' && $('#otherInfo').css('display') == 'block') {
-                infoState('none');
-            }
-            else if (this.state == 'none' && $('#otherInfo').css('display') == 'none') {
-                infoState('block');
-            }
-            $('.error').css('display', this.state);
-        }
-
-
-        returnCurrentState() {
-            return $('.error').css('display');
-        }
-
-
-    }
-
 });
