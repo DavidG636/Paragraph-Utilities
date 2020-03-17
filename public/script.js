@@ -1,7 +1,14 @@
 $(function() {
-    var charsCheck = /^[A-Za-z1-99999]+$/;
-    var prepositions = new Array("a", "abaft", "aboard", "about", "above", "absent", "across", "afore", "after", "against", "along", "alongside", "amid", "amidst", "among", "amongst", "an", "apropos", "apud", "around", "as", "aside", "astride", "at", "athwart", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "circa", "concerning", "despite", "down", "during", "except", "excluding", "failing", "following", "for", "from", "given", "in", "including", "inside", "into", "lest", "like", "mid", "midst", "minus", "modulo", "near", "next", "notwithstanding", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "pace", "past", "per", "plus", "pro", "qua", "regarding", "round", "sans", "save", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "vs.", "via", "vice", "with", "within", "without", "worth", "according", "to", "ahead", "of", "apart", "from", "as", "for", "as", "of", "as", "per", "as", "regards", "aside", "from", "back", "to", "because", "of", "close", "to", "due", "to", "except", "for", "far", "from", "into", "inside", "of", "instead", "of", "left", "of", "near", "to", "next", "to", "on", "to", "out", "from", "out", "of", "outside", "of", "owing", "to", "prior", "to", "pursuant", "to", "rather", "than", "regardless", "of", "right", "of", "subsequent", "to", "thanks", "to", "that", "of", "up", "to", "where", "as", "as", "far", "as", "as", "long", "as", "as", "opposed", "to", "as", "soon", "as", "as", "well", "as", "regarding");
-    var words;
+
+  var charsCheck = /^[A-Za-z1-99999]+$/;
+  var prepositions = new Array("a", "abaft", "aboard", "about", "above", "absent", "across", "afore", "after", "against", "along", "alongside", "amid", "amidst", "among", "amongst", "an", "apropos", "apud", "around", "as", "aside", "astride", "at", "athwart", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "circa", "concerning", "despite", "down", "during", "except", "excluding", "failing", "following", "for", "from", "given", "in", "including", "inside", "into", "lest", "like", "mid", "midst", "minus", "modulo", "near", "next", "notwithstanding", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "pace", "past", "per", "plus", "pro", "qua", "regarding", "round", "sans", "save", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "vs.", "via", "vice", "with", "within", "without", "worth", "according", "ahead", "apart", "regards", "back", "because", "close", "due", "far", "instead", "left", "owing", "prior", "pursuant", "rather", "regardless", "right", "subsequent", "thanks", "that", "where", "long",  "opposed",  "soon",  "well");
+  var words;
+  var numOfWords = 0;
+  var sentenceCount = 0;
+  var punctuationCount = 0;
+  var punctuation = ['?', '.', '!', ',', ';', ':', '"', "'", '-'];
+  var punctuationLength = punctuation.length;
+  var prepositionCount = 0;
 
     function getUserInput() {
         let userInput = $('.para').val();
@@ -19,14 +26,12 @@ $(function() {
     });
 
     $('.para').keyup(function() {
-        let userInput = getUserInput();
-        var numOfWords;
-        let sentenceCount = 0;
-        let punctuationCount = 0;
-        let punctuation = ['?', '.', '!', ',', ';', ':', '"', "'", '-'];
-        let punctuationLength = punctuation.length;
-        let charCountWithWhitespace = userInput.length;
-        let prepositionCount = 0;
+        var userInput = getUserInput();
+        var charCountWithWhitespace = 0;
+        var charCountWithoutWhitespace = userInput.length;
+        prepositionCount = 0;
+        sentenceCount = 0;
+        punctuationCount = 0;
 
         if (userInput[0] == undefined) {
           sentenceCount = 0;
@@ -37,10 +42,11 @@ $(function() {
           numOfWords = 0;
         }
         else if (userInput[0].match(charsCheck) || userInput[1].match(charsCheck)) {
-
-            for (let i = 0; i <= charCountWithWhitespace; i++) {
+            console.log(charCountWithoutWhitespace);
+            for (let i = 0; i <= charCountWithoutWhitespace; i++) {
                 if (userInput[i] == '.' || userInput[i] == '!' || userInput[i] == '?') {
                     sentenceCount += 1;
+                    console.log(sentenceCount);
                 }
 
                 for (let a = 0; a < punctuationLength; a++) {
@@ -64,12 +70,13 @@ $(function() {
                 }
             }
             let numOfSpaces = 0;
-            for (let j = 0; j <= charCountWithWhitespace; j++) {
+            for (let j = 0; j <= charCountWithoutWhitespace; j++) {
                 if (userInput[j] == " ") {
                     numOfSpaces += 1;
                 }
             }
-            let charCountWithoutWhitespace = (charCountWithWhitespace - numOfSpaces);
+            charCountWithoutWhitespace = (charCountWithoutWhitespace - numOfSpaces);
+            charCountWithWhitespace = (charCountWithoutWhitespace + numOfSpaces);
         }
         $('#wordCount').html(numOfWords);
         $('#characterCountWithWhitespace').html(charCountWithWhitespace);

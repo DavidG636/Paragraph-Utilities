@@ -1,0 +1,19 @@
+{
+  "name": "paragraph-utilities",
+  "version": "1.0.0",
+  "description": "This website allows for users to find out information about their writing such as number of punctuation marks, sentences, and prepositions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidG636/Paragraph-Utilities.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidG636/Paragraph-Utilities/issues"
+  },
+  "homepage": "https://github.com/DavidG636/Paragraph-Utilities#readme"
+}
