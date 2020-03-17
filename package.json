@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/DavidG636/Paragraph-Utilities/issues"
   },
-  "homepage": "https://github.com/DavidG636/Paragraph-Utilities#readme"
+  "homepage": "https://github.com/DavidG636/Paragraph-Utilities#readme",
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  }
 }
