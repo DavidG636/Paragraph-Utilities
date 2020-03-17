@@ -4,7 +4,8 @@
   "description": "This website allows for users to find out information about their writing such as number of punctuation marks, sentences, and prepositions.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
