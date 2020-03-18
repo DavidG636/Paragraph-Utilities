@@ -19,6 +19,14 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
   res.render('pages/home');
-})
+});
+
+app.get('/Paragraph-Info', function (req, res) {
+  res.render('pages/paragraphInfo');
+});
+
+app.get('/case', function (req, res) {
+  res.render('pages/case');
+});
 
 module.exports = router;
