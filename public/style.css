@@ -5,7 +5,7 @@
 
 body {
   background-image: url("looseleaf.jpg");
-  background-repeat: repeat;
+  background-repeat: round;
   background-size: contain;
 }
 
@@ -171,4 +171,15 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+#home-div {
+  height:inherit;
+  font-family: 'Indie Flower', cursive;
+  font-size: 20pt;
+}
+
+#home-div p:nth-of-type(1) {
+  margin-bottom: 0px;
+  padding: 20vh 0 10vh;
 }
