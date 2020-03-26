@@ -183,3 +183,7 @@ input:checked + .slider:before {
   margin-bottom: 0px;
   padding: 20vh 0 10vh;
 }
+
+.pageGif {
+  border: 2px solid black;
+}
